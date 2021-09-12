@@ -109,7 +109,7 @@ def get_description_from_columns(
 
 class BaseConnection(object):
 
-    """Connection to an ES Cluster """
+    """Connection to an ES Cluster"""
 
     def __init__(
         self,
@@ -218,7 +218,7 @@ class BaseCursor:
     @check_result
     @check_closed
     def rowcount(self) -> int:
-        """ Counts the number of rows on a result """
+        """Counts the number of rows on a result"""
         if self._results:
             return len(self._results)
         return 0
@@ -230,7 +230,7 @@ class BaseCursor:
 
     @check_closed
     def execute(self, operation, parameters=None) -> "BaseCursor":
-        """ Children must implement their own custom execute """
+        """Children must implement their own custom execute"""
         raise NotImplementedError  # pragma: no cover
 
     @check_closed
@@ -308,7 +308,7 @@ class BaseCursor:
         """
         # Sanitize query
         query = self.sanitize_query(query)
-        payload = {"query": query}
+        payload = {"query": query, "time_zone": "Asia/Shanghai"}
         if self.fetch_size is not None:
             payload["fetch_size"] = self.fetch_size
         path = f"/{self.sql_path}/"
